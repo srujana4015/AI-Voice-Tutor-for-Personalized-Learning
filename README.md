@@ -1,11 +1,15 @@
 # AI-Voice-Tutor-for-Personalized-Learning
 The Problem
 In traditional education systems, students often:
-Feel shy to ask doubts repeatedly.
-Struggle to get instant help outside classroom hours.
-Require personalized explanations based on their level of understanding.
+Feel shy to ask doubts repeatedly.Struggle to get instant help outside classroom hours.Require personalized explanations based on their level of understanding.
 Find static content (like books or PDFs) overwhelming or hard to grasp without context.
 Many students, especially in rural or underserved regions, lack access to human tutors, and often rely on reading material that isn’t interactive or responsive.
+
+
+
+
+
+
 Objective
 To design and implement a low-latency AI Voice Assistant pipeline that:
 Accepts voice input from users
@@ -13,6 +17,9 @@ Converts speech to text
 Uses a Large Language Model (LLM) to generate a response
 Converts the response back into speech
 Uses a talking avatar to deliver the response
+
+
+
 Technologies and Services Used
 Frontend:
 HTML
@@ -53,5 +60,7 @@ Step 6: Display and Interaction
 The web application displays the video to the user.
 The student hears the answer and sees the avatar speaking, enhancing understanding and engagement.
 The user can ask another question or end the session.
+
+
 Conclusion
 This AI voice assistant demonstrates how speech technologies and large language models can be combined to build intelligent, interactive learning platforms. By integrating Azure services with web technologies, we created a pipeline that is scalable, customizable, and highly beneficial for personalized learning.
