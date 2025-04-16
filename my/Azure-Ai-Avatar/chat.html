@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI TUTOR</title>
+  <link href="./css/styles.css" rel="stylesheet" />
+  <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+  <script src="./js/chat.js"></script>
+</head>
+<body>
+  <h1 id="pageTitle">AI TUTOR</h1>
+
+  <!-- CONFIGURATION SECTION -->
+  <div id="configuration">
+    <h2>Azure Speech Resource</h2>
+    <label for="region">Region:</label>
+    <select id="region">
+      <option value="westus2">West US 2</option>
+      <option value="westeurope">West Europe</option>
+      <option value="southeastasia">Southeast Asia</option>
+      <option value="southcentralus">South Central US</option>
+      <option value="northeurope">North Europe</option>
+      <option value="swedencentral">Sweden Central</option>
+      <option value="eastus2">East US 2</option>
+    </select>=
+    <label for="APIKey">API Key:</label>
+    <input id="APIKey" type="password" size="32" />
+    <br />
+    <input type="checkbox" id="enablePrivateEndpoint" onchange="window.updatePrivateEndpoint()" />
+    <label for="enablePrivateEndpoint">Enable Private Endpoint</label>
+    <div id="showPrivateEndpointCheckBox" hidden>
+      <label for="privateEndpoint">Private Endpoint:</label>
+      <input id="privateEndpoint" type="text" size="64" placeholder="https://{your}.cognitiveservices.azure.com/" />
+    </div>
+    <br />
+
+    <h2>Azure OpenAI Resource</h2>
+    <label for="azureOpenAIEndpoint">Endpoint:</label>
+    <input id="azureOpenAIEndpoint" type="text" size="64" />
+    <br />
+    <label for="azureOpenAIApiKey">API Key:</label>
+    <input id="azureOpenAIApiKey" type="password" size="32" />
+    <br />
+    <label for="azureOpenAIDeploymentName">Deployment Name:</label>
+    <input id="azureOpenAIDeploymentName" type="text" size="32" />
+    <br />
+    <label for="prompt">System Prompt:</label><br />
+    <textarea id="prompt" rows="3" cols="80">You are an AI assistant that helps people find information.</textarea>
+    <br />
+    <input type="checkbox" id="enableOyd" onchange="window.updataEnableOyd()" />
+    <label for="enableOyd">Enable On Your Data</label>
+    <div id="cogSearchConfig" hidden>
+      <h3>Azure Cognitive Search Resource</h3>
+      <label for="azureCogSearchEndpoint">Endpoint:</label>
+      <input id="azureCogSearchEndpoint" type="text" size="64" />
+      <br />
+      <label for="azureCogSearchApiKey">API Key:</label>
+      <input id="azureCogSearchApiKey" type="password" size="32" />
+      <br />
+      <label for="azureCogSearchIndexName">Index Name:</label>
+      <input id="azureCogSearchIndexName" type="text" size="32" />
+    </div>
+    <br />
+
+    <h2>STT / TTS Configuration</h2>
+    <label for="sttLocales">STT Locale(s):</label>
+    <input id="sttLocales" type="text" size="64" value="en-US,de-DE,es-ES,fr-FR,it-IT,ja-JP,ko-KR,zh-CN" />
+    <br />
+    <label for="ttsVoice">TTS Voice:</label>
+    <input id="ttsVoice" type="text" size="32" value="en-US-AvaMultilingualNeural" />
+    <br />
+
+    <!-- Removed: Custom Voice Deployment ID and Personal Voice Speaker Profile ID -->
+
+    <input type="checkbox" id="continuousConversation" />
+    <label for="continuousConversation">Continuous Conversation</label>
+    <br /><br />
+
+    <h2>Avatar Configuration</h2>
+    <label for="talkingAvatarCharacter">Avatar Character:</label>
+    <input id="talkingAvatarCharacter" type="text" value="meg" />
+    <br />
+    <label for="talkingAvatarStyle">Avatar Style:</label>
+    <input id="talkingAvatarStyle" type="text" value="formal" />
+    <br />
+    <!-- Removed: Custom Avatar, Auto Reconnect, Use Local Video for Idle, Show Subtitles -->
+  </div>
+  <!-- END CONFIGURATION -->
+
+  <!-- SINGLE BUTTON to open the avatar session -->
+  <button id="openSessionButton" onclick="window.startSession()">Open Avatar Session</button>
+
+  <!-- MAIN ROW: left = #buttonContainer, right = #videoContainer -->
+  <div id="mainContainer">
+    <!-- The 4 control buttons, hidden initially -->
+    <div id="buttonContainer" hidden>
+      <button id="microphone" onclick="window.microphone()" disabled>Start Microphone</button>
+      <button id="stopSpeaking" onclick="stopSpeaking()" disabled>Stop Speaking</button>
+      <button id="clearChatHistory" onclick="window.clearChatHistory()">Clear Chat History</button>
+      <button id="stopSession" onclick="window.stopSession()" disabled>Close Avatar Session</button>
+    </div>
+
+    <!-- The avatar/video container on the right, hidden at first -->
+    <div id="videoContainer" hidden>
+      <!-- Overlays on top of the video (e.g. chatHistory) -->
+      <div id="overlayArea" style="position: absolute; top: 0; left: 0; width: 360px; min-height: 100px; z-index: 10;">
+        <div id="chatHistory" hidden></div>
+      </div>
+      <!-- Local idle video (if needed) -->
+      <div id="localVideo" hidden>
+        <video src="video/lisa-casual-sitting-idle.mp4" autoplay loop muted></video>
+      </div>
+      <!-- Remote avatar feed -->
+      <div id="remoteVideo"></div>
+      <!-- Subtitles overlay -->
+      <div id="subtitles" hidden></div>
+    </div>
+  </div>
+
+  <!-- TYPE MESSAGE UI -->
+  <div style="margin-top:10px;">
+    <div id="showTypeMessageCheckbox">
+      <input type="checkbox" id="showTypeMessage" onchange="window.updateTypeMessageBox()" />
+      <label for="showTypeMessage">Type Message</label>
+      <br />
+    </div>
+    <div id="userMessageBox" style="width: 940px; min-height: 150px; max-height: 200px; border: 1px solid; overflow-y: scroll; padding: 10px;" hidden contentEditable="true"></div>
+  </div>
+  <div>
+    <img id="uploadImgIcon" src="./image/attachment.jpg" alt="Attach" style="cursor: pointer;" hidden />
+  </div>
+</body>
+</html>

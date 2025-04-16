@@ -1,0 +1,135 @@
+/*
+ * Minimal working styles for your avatar page
+ */
+ .hidden {
+    display: none;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 1em;
+    word-break: break-word;
+  }
+  
+  /* Center the main heading */
+  #pageTitle {
+    text-align: center;
+  }
+  
+  /* Default button style (for Open Avatar Session, etc.) */
+  button {
+    background-color: #d84a38;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    font-size: 0.8em;
+    margin: 10px 0 1em 0;
+    padding: 0.5em 0.7em 0.6em 0.7em;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #cf402f;
+  }
+  
+  button:active {
+    background-color: #b73626;
+  }
+  
+  button[disabled] {
+    color: #ccc;
+  }
+  
+  button[disabled]:hover {
+    background-color: #d84a38;
+  }
+  
+  /* Layout for main container: left = #buttonContainer, right = #videoContainer */
+  #mainContainer {
+    display: flex;
+    align-items: flex-start; /* keep them top aligned in the same row */
+    gap: 2em;
+    margin-top: 2em;
+  }
+  
+  /* The left column: 4 control buttons, stacked. */
+  #buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    width: fit-content;
+  }
+  
+  /* Style these 4 specifically as blue */
+  #buttonContainer button {
+    background-color: #1976D2;
+    color: #fff;
+    font-family: "Arial", sans-serif;
+    font-size: 0.9em;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  #buttonContainer button:hover {
+    background-color: #1565C0;
+  }
+  
+  #buttonContainer button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+  
+  /* The avatar container on the right */
+  #videoContainer {
+    position: relative; /* needed so absolute overlay (overlayArea) is pinned inside */
+    width: 960px;
+    margin: 0; /* so it lines up at the top */
+  }
+  
+  /* No dark background on the <video> itself */
+  video {
+    width: 100%;
+    height: auto;
+    background: none; /* remove #222 or black background */
+    max-width: 100%;
+  }
+  
+  /* The chatHistory area if you want to overlay text or other elements */
+  #chatHistory {
+    width: 360px;
+    height: 480px;
+    font-size: medium;
+    border: none;
+    resize: none;
+    background-color: rgba(255,255,255,0.6); /* or transparent, if you prefer */
+    overflow: hidden;
+  }
+  
+  /* Subtitles overlay */
+  #subtitles {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-shadow: -1px -1px 0 #000,
+                 1px -1px 0 #000,
+                 -1px 1px 0 #000,
+                 1px 1px 0 #000;
+    font-size: 22px;
+    position: absolute;
+    bottom: 5%;
+    z-index: 999;
+  }
+  
+  /* Other default rules can remain as needed */
+  /* e.g. textareas, input fields, etc. */
+  textarea {
+    font-family: 'Roboto', sans-serif;
+    width: 800px;
+    min-height: 60px;
+    margin-bottom: 10px;
+  }
+  
